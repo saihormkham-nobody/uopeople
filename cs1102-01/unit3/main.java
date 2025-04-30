@@ -16,6 +16,67 @@ public class main {
 }
 
 /**
+ * StudentUtils class provides static methods and variables for student record management
+ * This demonstrates a classless structure with static methods for operations
+ */
+class StudentUtils {
+    // Static variables to store data across all instances
+    private static ArrayList<Student> students = new ArrayList<>();
+    private static int totalStudents = 0;
+
+    /**
+     * Adds a new student to the repository if the ID doesn't already exist
+     *
+     * @param student Student object to be added
+     * @return true if student was added successfully, false if ID already exists
+     */
+    public static boolean addStudent(Student student) {
+        // Check if a student with the same ID already exists
+        for (Student s : students) {
+            if (s.getId().equals(student.getId())) {
+                return false;  // Student with this ID already exists
+            }
+        }
+        students.add(student);
+        totalStudents++;      // Increment the static counter
+        return true;
+    }
+
+    /**
+     * Searches for a student by their ID
+     *
+     * @param id The ID to search for
+     * @return Student object if found, null otherwise
+     */
+    public static Student findStudentById(String id) {
+        for (Student student : students) {
+            if (student.getId().equals(id)) {
+                return student;
+            }
+        }
+        return null;  // Student not found
+    }
+
+    /**
+     * Returns all students in the repository
+     *
+     * @return ArrayList containing all student records
+     */
+    public static ArrayList<Student> getAllStudents() {
+        return students;
+    }
+
+    /**
+     * Gets the total count of students added to the system
+     *
+     * @return Total number of students
+     */
+    public static int getTotalStudents() {
+        return totalStudents;
+    }
+}
+
+/**
  * Student class represents a student entity with all its attributes and behaviors
  * This demonstrates encapsulation by keeping fields private and providing getter/setter methods
  */
@@ -149,15 +210,7 @@ class StudentRepository {
      * @return true if student was added successfully, false if ID already exists
      */
     public boolean addStudent(Student student) {
-        // Check if a student with the same ID already exists
-        for (Student s : students) {
-            if (s.getId().equals(student.getId())) {
-                return false;  // Student with this ID already exists
-            }
-        }
-        students.add(student);
-        totalStudents++;      // Increment the static counter
-        return true;
+        return StudentUtils.addStudent(student);
     }
 
     /**
@@ -167,12 +220,7 @@ class StudentRepository {
      * @return Student object if found, null otherwise
      */
     public Student findStudentById(String id) {
-        for (Student student : students) {
-            if (student.getId().equals(id)) {
-                return student;
-            }
-        }
-        return null;  // Student not found
+        return StudentUtils.findStudentById(id);
     }
 
     /**
@@ -181,7 +229,7 @@ class StudentRepository {
      * @return ArrayList containing all student records
      */
     public ArrayList<Student> getAllStudents() {
-        return students;
+        return StudentUtils.getAllStudents();
     }
 
     /**
@@ -190,7 +238,7 @@ class StudentRepository {
      * @return Total number of students
      */
     public int getTotalStudents() {
-        return totalStudents;
+        return StudentUtils.getTotalStudents();
     }
 }
 
