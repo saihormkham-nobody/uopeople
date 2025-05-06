@@ -1,11 +1,13 @@
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * Stock Price Analysis Program
- * This program implements various methods to analyze stock prices
- * stored in both arrays and ArrayLists.
+ * Stock Price Analysis Program This program implements various methods to
+ * analyze stock prices stored in both arrays and ArrayLists.
  */
 public class main {
+
     public static void main(String[] args) {
         // Sample data: Daily stock prices for a period
         int[] stockPricesArray = {145, 167, 156, 145, 172, 168, 145};
@@ -26,21 +28,25 @@ public class main {
 
         // Testing occurrence count
         int targetPrice = 145;
-        System.out.println("Occurrences of $" + targetPrice + " (Array): " +
-                          countOccurrences(stockPricesArray, targetPrice));
-        System.out.println("Occurrences of $" + targetPrice + " (ArrayList): " +
-                          countOccurrences(stockPricesList, targetPrice));
+        System.out.println("Occurrences of $" + targetPrice + " (Array): "
+                + countOccurrences(stockPricesArray, targetPrice));
+        System.out.println("Occurrences of $" + targetPrice + " (ArrayList): "
+                + countOccurrences(stockPricesList, targetPrice));
 
         // Testing occurrence count with a non-existent price
         targetPrice = 200;
-        System.out.println("Occurrences of $" + targetPrice + " (Array): " +
-                          countOccurrences(stockPricesArray, targetPrice));
-        System.out.println("Occurrences of $" + targetPrice + " (ArrayList): " +
-                          countOccurrences(stockPricesList, targetPrice));
+        System.out.println("Occurrences of $" + targetPrice + " (Array): "
+                + countOccurrences(stockPricesArray, targetPrice));
+        System.out.println("Occurrences of $" + targetPrice + " (ArrayList): "
+                + countOccurrences(stockPricesList, targetPrice));
 
-        // Testing cumulative sum
-        ArrayList<Integer> cumulativeSum = computeCumulativeSum(stockPricesList);
-        System.out.println("Cumulative Sum of Stock Prices: " + cumulativeSum);
+        // Testing cumulative sum for Array
+        int[] cumulativeSumArray = computeCumulativeSum(stockPricesArray);
+        System.out.println("Cumulative Sum of Stock Prices (Array): " + Arrays.toString(cumulativeSumArray));
+        // Testing cumulative sum for ArrayList
+        ArrayList<Integer> cumulativeSumArrayList = computeCumulativeSum(stockPricesList);
+        System.out.println("Cumulative Sum of Stock Prices (ArrayList): " + cumulativeSumArrayList);
+
     }
 
     /**
@@ -184,6 +190,27 @@ public class main {
         for (int price : prices) {
             sum += price;
             cumulativeSum.add(sum);
+        }
+
+        return cumulativeSum;
+    }
+
+    /**
+     * Computes the cumulative sum of stock prices in an array
+     *
+     * @param prices Array of stock prices
+     * @return Array containing cumulative sum at each position
+     */
+    public static int[] computeCumulativeSum(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            throw new IllegalArgumentException("Stock price array cannot be null or empty");
+        }
+
+        int[] cumulativeSum = new int[prices.length];
+        cumulativeSum[0] = prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            cumulativeSum[i] = cumulativeSum[i - 1] + prices[i];
         }
 
         return cumulativeSum;
