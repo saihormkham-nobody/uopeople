@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
