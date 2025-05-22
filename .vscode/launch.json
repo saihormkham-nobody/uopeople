@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "cs1102.unit7/cs1102.unit7.App",
+      "projectName": "student-mangement-system"
+    },
+    {
       "type": "jdk",
       "request": "launch",
       "name": "Launch Java App"
